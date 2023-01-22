@@ -3,6 +3,7 @@
   "compilerOptions": {},
   "include": [],
   "references": [
+    { "path": "./examples/basic-vite" },
     { "path": "./packages/otel-websocket-exporter" },
     { "path": "./packages/otel-websocket-proxy" }
   ]
