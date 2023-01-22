@@ -1,5 +1,5 @@
-import { listen } from "./";
+import { listen } from './index.js'
 
-const port = Number(process.env.OTEL_WEBSOCKET_PROXY_PORT) ?? 44318;
+const port = process.env.OTEL_WEBSOCKET_PROXY_PORT ? Number(process.env.OTEL_WEBSOCKET_PROXY_PORT) : 44318
 
-listen(port);
+listen(port)

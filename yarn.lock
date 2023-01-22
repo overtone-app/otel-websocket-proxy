@@ -1294,6 +1294,7 @@ __metadata:
     "@types/react-dom": ^18.0.9
     "@vitejs/plugin-react": ^3.0.0
     otel-websocket-exporter: "workspace:*"
+    otel-websocket-proxy: "workspace:*"
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^4.9.3
@@ -2421,6 +2422,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"monorepo@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "monorepo@workspace:."
+  dependencies:
+    typescript: ^4.9.4
+  languageName: unknown
+  linkType: soft
+
 "ms@npm:2.1.2":
   version: 2.1.2
   resolution: "ms@npm:2.1.2"
@@ -2535,7 +2544,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"otel-websocket-proxy@workspace:packages/otel-websocket-proxy":
+"otel-websocket-proxy@workspace:*, otel-websocket-proxy@workspace:packages/otel-websocket-proxy":
   version: 0.0.0-use.local
   resolution: "otel-websocket-proxy@workspace:packages/otel-websocket-proxy"
   dependencies:
@@ -2544,6 +2553,8 @@ __metadata:
     "@types/ws": ^8
     tsx: ^3.12.2
     ws: ^8.12.0
+  bin:
+    otel-websocket-proxy: ./dist/bin.js
   languageName: unknown
   linkType: soft
 
@@ -2746,14 +2757,6 @@ __metadata:
   checksum: 69c2bba82833f2977db08a5c10da651e0668f1335652499543c297633eb44eaf1473575973025a07cffd78903be8d10626e5abac063e49fb47d3f7dd8c18bf00
   languageName: node
   linkType: hard
-
-"root-workspace-0b6124@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "root-workspace-0b6124@workspace:."
-  dependencies:
-    typescript: ^4.9.4
-  languageName: unknown
-  linkType: soft
 
 "safe-buffer@npm:~5.2.0":
   version: 5.2.1

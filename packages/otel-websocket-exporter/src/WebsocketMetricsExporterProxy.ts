@@ -4,7 +4,7 @@ import { diag } from '@opentelemetry/api'
 
 import { createExportMetricsServiceRequest, IExportMetricsServiceRequest } from '@opentelemetry/otlp-transformer'
 
-import { closeWebSocket, connectToWebSocket, sendToWebSocket } from './websocket'
+import { closeWebSocket, connectToWebSocket, sendToWebSocket } from './websocket.js'
 
 const DEFAULT_WEBSOCKET_RESOURCE_PATH = 'v1/metrics'
 const DEFAULT_WEBSOCKET_URL = `http://localhost:44318/${DEFAULT_WEBSOCKET_RESOURCE_PATH}`

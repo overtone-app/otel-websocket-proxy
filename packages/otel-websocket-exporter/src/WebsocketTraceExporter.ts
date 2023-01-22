@@ -3,7 +3,7 @@ import { OTLPExporterConfigBase, OTLPExporterBase } from '@opentelemetry/otlp-ex
 import { createExportTraceServiceRequest, IExportTraceServiceRequest } from '@opentelemetry/otlp-transformer'
 import { diag } from '@opentelemetry/api'
 
-import { closeWebSocket, connectToWebSocket, sendToWebSocket } from './websocket'
+import { closeWebSocket, connectToWebSocket, sendToWebSocket } from './websocket.js'
 
 const DEFAULT_WEBSOCKET_RESOURCE_PATH = 'v1/traces'
 const DEFAULT_WEBSOCKET_URL = `http://localhost:44318/${DEFAULT_WEBSOCKET_RESOURCE_PATH}`

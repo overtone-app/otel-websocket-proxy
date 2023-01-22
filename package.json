@@ -1,9 +1,12 @@
 {
+  "name": "monorepo",
+  "private": true,
   "workspaces": [
     "packages/*",
     "examples/*"
   ],
   "scripts": {
+    "release": "yarn build:ts && yarn workspaces foreach --verbose --topological-dev --parallel --no-private npm publish --tolerate-republish",
     "build:ts": "tsc --build tsconfig.all.json",
     "dev:ts": "yarn build:ts --watch",
     "test": "CI=true yarn workspaces foreach --parallel --all run test"

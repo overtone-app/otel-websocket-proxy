@@ -1,6 +1,7 @@
 {
   "name": "otel-websocket-proxy",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "type": "module",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
@@ -8,9 +9,7 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "bin": {
-    "otel-ws-proxy": "./dist/bin.js"
-  },
+  "bin": "./dist/bin.js",
   "dependencies": {
     "@opentelemetry/api": "^1.4.0",
     "@opentelemetry/sdk-node": "^0.35.0",
