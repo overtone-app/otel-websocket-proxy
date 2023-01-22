@@ -1,0 +1,15 @@
+{
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "build:ts": "tsc --build tsconfig.all.json",
+    "dev:ts": "yarn build:ts --watch",
+    "test": "CI=true yarn workspaces foreach --parallel --all run test"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.4"
+  },
+  "packageManager": "yarn@3.2.2"
+}

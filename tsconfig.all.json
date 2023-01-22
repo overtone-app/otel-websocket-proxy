@@ -1,0 +1,9 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {},
+  "include": [],
+  "references": [
+    { "path": "./packages/otel-websocket-exporter" },
+    { "path": "./packages/otel-websocket-proxy" }
+  ]
+}

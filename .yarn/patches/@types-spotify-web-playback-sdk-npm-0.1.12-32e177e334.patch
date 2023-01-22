@@ -1,0 +1,17 @@
+diff --git a/index.d.ts b/index.d.ts
+index 024db0b4c0d521230bc9a7752d054f44ef308f08..5651f54c28da5d3565a68952196d729a4bd16d1f 100755
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -10,10 +10,10 @@
+ 
+ interface Window {
+     onSpotifyWebPlaybackSDKReady(): void;
+-    Spotify: typeof Spotify;
++    Spotify: typeof SpotifyWebPlaybackSDK;
+ }
+ 
+-declare namespace Spotify {
++declare namespace SpotifyWebPlaybackSDK {
+     interface Album {
+         uri: string;
+         name: string;
