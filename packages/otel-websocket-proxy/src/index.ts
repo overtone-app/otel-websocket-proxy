@@ -1,20 +1,25 @@
+import { DiagConsoleLogger } from "@opentelemetry/api";
 import { createServer } from "http";
 import { parse } from "url";
 import { WebSocketServer } from "ws";
 import { metrics } from "./metrics";
 // import { traces } from "./traces";
 
-const URL = "http://localhost:4318/v1/traces";
-const PORT = 8080;
+const collectorUrl =
+  process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT ??
+  "http://localhost:4318/v1/traces";
 
 const server = createServer();
-const traces = new WebSocketServer({ port: PORT });
+const traces = new WebSocketServer({ port: 44318 });
+console.log("Listening");
 
 traces.on("connection", (ws) => {
+  console.log("Waiting for handshake");
   ws.once("message", async (body) => {
     // Handshake
     let handshake = body.toString();
     if (handshake !== "init-request") {
+      console.log("Handshake failed");
       ws.close(400, "Unauthorized");
       return;
     }
@@ -25,9 +30,15 @@ traces.on("connection", (ws) => {
       try {
         await new Promise((resolve, reject) => {
           ws.once("message", (body) => {
-            console.log("Proxying");
+            console.log("Proxying", Buffer.isBuffer(body));
             if (Buffer.isBuffer(body)) {
-              fetch(URL, { method: "POST", body }).then(resolve).catch(reject);
+              fetch(collectorUrl, {
+                method: "POST",
+                body,
+                headers: { "Content-Type": "application/json" },
+              })
+                .then(resolve)
+                .catch(reject);
             }
           });
         });
