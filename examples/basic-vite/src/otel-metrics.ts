@@ -1,5 +1,6 @@
 import { DiagConsoleLogger, DiagLogLevel, diag, metrics } from '@opentelemetry/api'
 import { OTLPMetricExporter } from '@opentelemetry/exporter-metrics-otlp-http'
+import { WebsocketMetricExporter } from 'otel-websocket-exporter'
 import { MeterProvider, PeriodicExportingMetricReader } from '@opentelemetry/sdk-metrics'
 
 // Optional and only needed to see the internal diagnostic logging (during development)
@@ -10,17 +11,26 @@ export const doExampleMetrics = async () => {
 
   metrics.setGlobalMeterProvider(meterProvider)
 
-  const exporterUrlMetrics =
-    import.meta.env?.VITE_OTEL_EXPORTER_OTLP_METRICS_ENDPOINT ?? 'http://localhost:4318/v1/metrics'
+  // const exporterUrlMetrics =
+  //   import.meta.env?.VITE_OTEL_EXPORTER_OTLP_METRICS_ENDPOINT ?? 'http://localhost:4318/v1/metrics'
 
-  // TODO replace with websocket exporter
+  // meterProvider.addMetricReader(
+  //   new PeriodicExportingMetricReader({
+  //     exporter: new OTLPMetricExporter({
+  //       // empty headers makes sure to use XHR instead of `navigator.sendBeacon`
+  //       headers: {},
+  //       url: exporterUrlMetrics,
+  //     }),
+  //     exportIntervalMillis: 1000,
+  //   }),
+  // )
+
+  const websocketExporterUrlMetrics =
+    import.meta.env?.VITE_OTEL_EXPORTER_WEBSOCKET_METRICS_ENDPOINT ?? 'ws://localhost:44318/v1/metrics'
+
   meterProvider.addMetricReader(
     new PeriodicExportingMetricReader({
-      exporter: new OTLPMetricExporter({
-        // empty headers makes sure to use XHR instead of `navigator.sendBeacon`
-        headers: {},
-        url: exporterUrlMetrics,
-      }),
+      exporter: new WebsocketMetricExporter({ url: websocketExporterUrlMetrics }),
       exportIntervalMillis: 1000,
     }),
   )
