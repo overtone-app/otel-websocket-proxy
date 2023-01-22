@@ -17,6 +17,7 @@
     "@opentelemetry/sdk-trace-base": "1.5.0",
     "@opentelemetry/sdk-trace-web": "1.5.0",
     "@opentelemetry/semantic-conventions": "1.5.0",
+    "otel-websocket-exporter": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

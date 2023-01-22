@@ -22,7 +22,7 @@ export const connectToWebSocket = async (url: string) => {
 }
 
 export const sendToWebSocket = (socket: WebSocket, data: string) => {
-  socket.send(JSON.stringify(data))
+  socket.send(data)
 }
 
 export const closeWebSocket = (socket: WebSocket) => {
