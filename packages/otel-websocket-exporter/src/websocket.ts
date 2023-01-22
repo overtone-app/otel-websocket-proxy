@@ -1,30 +1,31 @@
 export const connectToWebSocket = async (url: string) => {
-  const socket = new WebSocket(url)
+  const socket = new WebSocket(url);
 
   return new Promise<WebSocket>((resolve, reject) => {
-    socket.addEventListener(
-      'message',
-      (msg) => {
-        const data = JSON.parse(msg.data)
-        if (data.type === 'init-response') {
-          resolve(socket)
-        } else {
-          console.log('Unexpected message', data)
+    socket.addEventListener("open", () => {
+      socket.addEventListener(
+        "message",
+        (msg) => {
+          if (msg.data === "init-response") {
+            resolve(socket);
+          } else {
+            console.log("Unexpected message", msg);
 
-          reject(new Error('Unexpected message'))
-        }
-      },
-      { once: true },
-    )
+            reject(new Error("Unexpected message"));
+          }
+        },
+        { once: true }
+      );
 
-    socket.send(JSON.stringify({ type: 'init-request' }))
-  })
-}
+      socket.send("init-request");
+    });
+  });
+};
 
 export const sendToWebSocket = (socket: WebSocket, data: string) => {
-  socket.send(data)
-}
+  socket.send(data);
+};
 
 export const closeWebSocket = (socket: WebSocket) => {
-  socket.close()
-}
+  socket.close();
+};

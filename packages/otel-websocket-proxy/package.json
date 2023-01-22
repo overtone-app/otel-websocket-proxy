@@ -6,5 +6,17 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     }
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.4.0",
+    "@opentelemetry/sdk-node": "^0.35.0",
+    "ws": "^8.12.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8",
+    "tsx": "^3.12.2"
+  },
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
   }
 }
