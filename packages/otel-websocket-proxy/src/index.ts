@@ -21,6 +21,7 @@ server.on("upgrade", function (request, socket, upgradeHead) {
   }
 });
 
-const PORT = 44318;
-server.listen(PORT);
-console.log("Listening on", PORT);
+export const listen = (port: number) => {
+  server.listen(port);
+  console.log(`Proxy is up on :${port}`);
+};
