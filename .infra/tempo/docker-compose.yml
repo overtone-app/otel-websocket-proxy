@@ -1,0 +1,52 @@
+version: "3"
+services:
+
+  otel-collector:
+    # https://hub.docker.com/r/otel/opentelemetry-collector/tags
+    image: otel/opentelemetry-collector:0.64.1
+    command: [ "--config=/etc/otel-collector.yml" ]
+    volumes:
+      - ./otel-collector.yml:/etc/otel-collector.yml
+    ports:
+      - '4317:4317' # Otlp Grpc
+      - '4318:4318' # Otlp Http
+
+  tempo:
+    image: grafana/tempo:latest
+    command: [ "-config.file=/etc/tempo.yml" ]
+    volumes:
+      - ./tempo.yml:/etc/tempo.yml
+      - ./tempo-data:/tmp/tempo
+    ports:
+      - "3200" # query endpoint needed by grafana and prometheus
+
+  grafana:
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana.ini:/etc/grafana/grafana.ini # needed for tempo-search feature toggle
+      - ./grafana-datasources.yml:/etc/grafana/provisioning/datasources/datasources.yml
+      - ./grafana-dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./grafana-dashboards:/etc/dashboards
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+      - GF_AUTH_DISABLE_LOGIN_FORM=true
+    ports:
+      - "30003:3000" # web ui (on 30003 since 3000 is often used by other apps)
+  
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-remote-write-receiver
+      - --enable-feature=exemplar-storage
+    ports:
+      - '9090:9090' # web ui
+
+volumes:
+  prometheus_data: {}
