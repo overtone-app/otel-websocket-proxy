@@ -26,6 +26,7 @@ export const listen = async ({ port, useHttps = false }: { port: number; useHttp
 
 const makeHttpsServer = async () => {
   const certificate = await getCertificate()
+
   return createServerHttps({
     cert: certificate,
     key: certificate,

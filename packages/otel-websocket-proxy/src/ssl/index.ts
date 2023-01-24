@@ -16,12 +16,15 @@ export const getCertificate = async () => {
       throw new Error('cache is outdated.')
     }
 
+    console.log(`Found existing certificate at ${cachePath}`)
+
     return content
   } catch {
     const content = (await import('./certificate.js')).createCertificate()
-    fs.mkdir(cacheDir, { recursive: true })
-      .then(() => fs.writeFile(cachePath, content))
-      .catch(() => {})
+    await fs.mkdir(cacheDir, { recursive: true })
+    await fs.writeFile(cachePath, content)
+
+    console.log(`Created self-signed certificate at ${cachePath}`)
 
     return content
   }
