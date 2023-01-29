@@ -7,6 +7,8 @@ const metricsEndpoint = process.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT ?? 'http
 const proxy = (name: string, endpoint: string): WebSocketServer => {
   const server = new WebSocketServer({ noServer: true })
 
+  console.log(`[${name}] Proxying to ${endpoint}`)
+
   server.on('connection', (ws) => {
     ws.once('message', async (body) => {
       let handshake = body.toString()
@@ -25,7 +27,7 @@ const proxy = (name: string, endpoint: string): WebSocketServer => {
             method: 'POST',
             body,
             headers: { 'Content-Type': 'application/json' },
-          }).catch((e) => console.warn(`[${name}] Proxy failure`, e))
+          }).catch((e) => console.warn(`[${name}] Proxy failure`, e, body.toString()))
         } else {
           console.warn(`[${name}] Invalid payload on ${name}, ignoring`, body)
         }
