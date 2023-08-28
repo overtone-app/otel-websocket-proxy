@@ -10,4 +10,8 @@ const sslCert = process.env.OTEL_WEBSOCKET_HTTPS_CERT_PATH
 
 const ssl = sslKey && sslCert ? { key: sslKey, cert: sslCert } : undefined
 
-listen({ port, useHttps, ssl })
+const maxPayloadBytes = process.env.OTEL_WEBSOCKET_MAX_PAYLOAD_BYTES
+  ? Number(process.env.OTEL_WEBSOCKET_MAX_PAYLOAD_BYTES)
+  : undefined
+
+listen({ port, useHttps, ssl, maxPayloadBytes })

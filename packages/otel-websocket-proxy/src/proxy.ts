@@ -1,13 +1,16 @@
 import { WebSocketServer } from 'ws'
 
-const tracesEndpoint = process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT ?? 'http://localhost:4318/v1/traces'
-
-const metricsEndpoint = process.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT ?? 'http://localhost:4318/v1/metrics'
-
-const proxy = (name: string, endpoint: string): WebSocketServer => {
-  const server = new WebSocketServer({ noServer: true })
+export const proxy = (name: string, endpoint: string, maxPayloadBytes?: number): WebSocketServer => {
+  const server = new WebSocketServer({
+    noServer: true,
+    maxPayload: maxPayloadBytes,
+  })
 
   console.log(`[${name}] Proxying to ${endpoint}`)
+
+  if (maxPayloadBytes !== undefined) {
+    console.log(`[${name}] Max payload size: ${maxPayloadBytes} bytes`)
+  }
 
   server.on('connection', (ws) => {
     ws.once('message', async (body) => {
@@ -32,13 +35,12 @@ const proxy = (name: string, endpoint: string): WebSocketServer => {
           console.warn(`[${name}] Invalid payload on ${name}, ignoring`, body)
         }
       })
+
+      ws.on('error', (e) => {
+        console.error(`[${name}] Error on`, e)
+      })
     })
   })
 
   return server
 }
-
-const traces = proxy('traces', tracesEndpoint)
-const metrics = proxy('metrics', metricsEndpoint)
-
-export { traces, metrics }

@@ -1,11 +1,12 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "module": "ES2020",
-    "rootDir": "./src",
+    "module": "ESNext",
+    "rootDir": "./",
+    "resolveJsonModule": true,
     "outDir": "./dist",
     "tsBuildInfoFile": "./dist/.tsbuildinfo.json"
   },
-  "include": ["./src"],
+  "include": ["./src", "./package.json"],
   "references": []
 }
