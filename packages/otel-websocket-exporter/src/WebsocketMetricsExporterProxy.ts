@@ -32,11 +32,21 @@ export class WebsocketMetricsExporterProxy extends OTLPExporterBase<
   }
 
   send(items: ResourceMetrics[], onSuccess: () => void, onError: (error: any) => void): void {
+    const serviceRequest = this.convert(items)
+
+    return this.sendServiceRequest(serviceRequest, onSuccess, onError)
+  }
+
+  sendServiceRequest(
+    serviceRequest: IExportMetricsServiceRequest,
+    onSuccess: () => void,
+    onError: (error: any) => void,
+  ): void {
     if (this._shutdownOnce.isCalled) {
       diag.debug('Shutdown already started. Cannot send objects')
       return
     }
-    const serviceRequest = this.convert(items)
+
     const body = JSON.stringify(serviceRequest)
 
     const promise = this._websocketPromise
