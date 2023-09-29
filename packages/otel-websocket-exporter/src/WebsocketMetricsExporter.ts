@@ -35,9 +35,7 @@ export const DeltaTemporalitySelector: AggregationTemporalitySelector = (instrum
 
 function chooseTemporalitySelectorFromEnvironment() {
   const env = getEnv()
-  const configuredTemporality =
-    // @ts-expect-error not defined on env yet
-    env.OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE?.trim().toLowerCase()
+  const configuredTemporality = env.OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE?.trim().toLowerCase()
 
   if (configuredTemporality === 'cumulative') {
     return CumulativeTemporalitySelector
@@ -47,7 +45,6 @@ function chooseTemporalitySelectorFromEnvironment() {
   }
 
   diag.warn(
-    // @ts-expect-error not defined on env yet
     `OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE is set to '${env.OTEL_EXPORTER_OTLP_METRICS_TEMPORALITY_PREFERENCE}', but only 'cumulative' and 'delta' are allowed. Using default ('cumulative') instead.`,
   )
   return CumulativeTemporalitySelector
