@@ -26,11 +26,19 @@ export const proxy = (name: string, endpoint: string, maxPayloadBytes?: number):
 
       ws.on('message', async (body) => {
         if (Buffer.isBuffer(body)) {
-          fetch(endpoint, {
+          const res = await fetch(endpoint, {
             method: 'POST',
             body,
             headers: { 'Content-Type': 'application/json' },
-          }).catch((e) => console.warn(`[${name}] Proxy failure`, e, body.toString()))
+          }).catch((e) => {
+             console.warn(`[${name}] Proxy failure`, e, body.toString())
+             return undefined
+          })
+
+          if (res !== undefined && res.status !== 200)  {
+            const body = await res.json()
+            console.warn(`[${name}] Proxy failure`, res.status, body)
+          }
         } else {
           console.warn(`[${name}] Invalid payload on ${name}, ignoring`, body)
         }
