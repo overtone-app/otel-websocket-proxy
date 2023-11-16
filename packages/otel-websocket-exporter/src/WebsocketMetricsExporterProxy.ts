@@ -65,7 +65,7 @@ export class WebsocketMetricsExporterProxy extends OTLPExporterBase<
   }
 
   convert(metrics: ResourceMetrics[]): IExportMetricsServiceRequest {
-    return createExportMetricsServiceRequest(metrics)
+    return createExportMetricsServiceRequest(metrics, { useHex: true, useLongBits: false })
   }
 
   getDefaultUrl(config: OTLPExporterConfigBase): string {
