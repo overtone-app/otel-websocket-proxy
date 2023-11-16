@@ -67,7 +67,7 @@ export class WebsocketTraceExporter
   }
 
   convert(spans: ReadableSpan[]): IExportTraceServiceRequest {
-    return createExportTraceServiceRequest(spans, true)
+    return createExportTraceServiceRequest(spans, {useHex: true, useLongBits: false})
   }
 
   getDefaultUrl(config: OTLPExporterConfigBase): string {
