@@ -9,25 +9,25 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@opentelemetry/api": "^1.7.0",
-    "@opentelemetry/core": "1.18.1",
-    "@opentelemetry/exporter-metrics-otlp-http": "0.45.1",
-    "@opentelemetry/exporter-trace-otlp-http": "0.45.1",
-    "@opentelemetry/resources": "^1.18.1",
-    "@opentelemetry/sdk-metrics": "1.18.1",
-    "@opentelemetry/sdk-trace-base": "1.18.1",
-    "@opentelemetry/sdk-trace-web": "1.18.1",
-    "@opentelemetry/semantic-conventions": "1.18.1",
+    "@opentelemetry/api": "^1.8.0",
+    "@opentelemetry/core": "1.24.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "0.51.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.51.0",
+    "@opentelemetry/resources": "^1.24.0",
+    "@opentelemetry/sdk-metrics": "1.24.0",
+    "@opentelemetry/sdk-trace-base": "1.24.0",
+    "@opentelemetry/sdk-trace-web": "1.24.0",
+    "@opentelemetry/semantic-conventions": "1.24.0",
     "otel-websocket-exporter": "workspace:*",
     "otel-websocket-proxy": "workspace:*",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@vitejs/plugin-react": "^4.1.1",
-    "typescript": "^5.2.2",
-    "vite": "^4.5.0"
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.10"
   }
 }

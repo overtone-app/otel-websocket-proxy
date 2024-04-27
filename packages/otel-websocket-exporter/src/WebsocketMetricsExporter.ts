@@ -23,6 +23,7 @@ export const CumulativeTemporalitySelector: AggregationTemporalitySelector = () 
 export const DeltaTemporalitySelector: AggregationTemporalitySelector = (instrumentType: InstrumentType) => {
   switch (instrumentType) {
     case InstrumentType.COUNTER:
+    case InstrumentType.GAUGE:
     case InstrumentType.OBSERVABLE_COUNTER:
     case InstrumentType.HISTOGRAM:
     case InstrumentType.OBSERVABLE_GAUGE:
