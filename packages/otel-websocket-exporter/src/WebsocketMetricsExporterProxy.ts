@@ -23,11 +23,15 @@ export class WebsocketMetricsExporterProxy extends OTLPExporterBase<
   }
 
   onInit(): void {
+    if (typeof window !== 'undefined') {
     window.addEventListener('unload', this.shutdown)
+    }
   }
 
   onShutdown(): void {
+    if (typeof window !== 'undefined') {
     window.removeEventListener('unload', this.shutdown)
+    }
     this._websocketPromise.then((socket) => closeWebSocket(socket))
   }
 
