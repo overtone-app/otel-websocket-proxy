@@ -1,17 +1,27 @@
 #!/usr/bin/env node
 
-import { listen } from './index.js'
+import { listen } from "./index.js";
 
-const port = process.env.OTEL_WEBSOCKET_PROXY_PORT ? Number(process.env.OTEL_WEBSOCKET_PROXY_PORT) : 44318
-const useHttps = process.env.OTEL_WEBSOCKET_HTTPS !== undefined
+console.log(
+	"process.env.OTEL_WEBSOCKET*\n",
+	Object.keys(process.env)
+		.filter((k) => k.startsWith("OTEL_WEBSOCKET_"))
+		.map((k) => `  ${k}=${process.env[k]}`)
+		.join("\n"),
+);
 
-const sslKey = process.env.OTEL_WEBSOCKET_HTTPS_KEY_PATH
-const sslCert = process.env.OTEL_WEBSOCKET_HTTPS_CERT_PATH
+const port = process.env.OTEL_WEBSOCKET_PROXY_PORT
+	? Number(process.env.OTEL_WEBSOCKET_PROXY_PORT)
+	: 44318;
+const useHttps = process.env.OTEL_WEBSOCKET_HTTPS !== undefined;
 
-const ssl = sslKey && sslCert ? { key: sslKey, cert: sslCert } : undefined
+const sslKey = process.env.OTEL_WEBSOCKET_HTTPS_KEY_PATH;
+const sslCert = process.env.OTEL_WEBSOCKET_HTTPS_CERT_PATH;
+
+const ssl = sslKey && sslCert ? { key: sslKey, cert: sslCert } : undefined;
 
 const maxPayloadBytes = process.env.OTEL_WEBSOCKET_MAX_PAYLOAD_BYTES
-  ? Number(process.env.OTEL_WEBSOCKET_MAX_PAYLOAD_BYTES)
-  : undefined
+	? Number(process.env.OTEL_WEBSOCKET_MAX_PAYLOAD_BYTES)
+	: undefined;
 
-listen({ port, useHttps, ssl, maxPayloadBytes })
+listen({ port, useHttps, ssl, maxPayloadBytes });

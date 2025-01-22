@@ -1,20 +1,20 @@
 {
-  "name": "otel-websocket-exporter",
-  "version": "0.0.29",
-  "type": "module",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    }
-  },
-  "types": "./dist/index.d.ts",
-  "dependencies": {
-    "@opentelemetry/api": "^1.8.0",
-    "@opentelemetry/core": "^1.24.0",
-    "@opentelemetry/otlp-exporter-base": "^0.51.0",
-    "@opentelemetry/otlp-transformer": "^0.51.0",
-    "@opentelemetry/sdk-metrics": "^1.24.0",
-    "@opentelemetry/sdk-trace-base": "^1.24.0"
-  }
+	"name": "otel-websocket-exporter",
+	"version": "0.0.32",
+	"type": "module",
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/index.d.ts"
+		}
+	},
+	"types": "./dist/index.d.ts",
+	"dependencies": {
+		"@opentelemetry/api": "^1.9.0",
+		"@opentelemetry/core": "^1.30.0",
+		"@opentelemetry/otlp-exporter-base": "^0.57.0",
+		"@opentelemetry/otlp-transformer": "^0.57.0",
+		"@opentelemetry/sdk-metrics": "^1.30.0",
+		"@opentelemetry/sdk-trace-base": "^1.30.0"
+	}
 }
