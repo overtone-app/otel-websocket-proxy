@@ -3,9 +3,9 @@
 import { listen } from "./index.js";
 
 console.log(
-	"process.env.OTEL_WEBSOCKET*\n",
+	"process.env.OTEL_*\n",
 	Object.keys(process.env)
-		.filter((k) => k.startsWith("OTEL_WEBSOCKET_"))
+		.filter((k) => k.startsWith("OTEL_"))
 		.map((k) => `  ${k}=${process.env[k]}`)
 		.join("\n"),
 );

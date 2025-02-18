@@ -13,12 +13,16 @@ export type SSLInfo = {
 	key: string;
 };
 
+const exporterEndpoint = process.env.OTEL_EXPORTER_OTLP_ENDPOINT;
+
 const tracesEndpoint =
 	process.env.OTEL_EXPORTER_OTLP_TRACES_ENDPOINT ??
+	(exporterEndpoint ? `${exporterEndpoint}/v1/traces` : undefined) ??
 	"http://localhost:4318/v1/traces";
 
 const metricsEndpoint =
 	process.env.OTEL_EXPORTER_OTLP_METRICS_ENDPOINT ??
+	(exporterEndpoint ? `${exporterEndpoint}/v1/metrics` : undefined) ??
 	"http://localhost:4318/v1/metrics";
 
 export const listen = async ({
@@ -43,7 +47,6 @@ export const listen = async ({
 		const { pathname } = parse(request.url ?? "");
 
 		if (pathname === "/v1/traces") {
-			console.log(pathname);
 			traces.handleUpgrade(request, socket, upgradeHead, (ws) =>
 				traces.emit("connection", ws, request),
 			);
@@ -52,6 +55,7 @@ export const listen = async ({
 				metrics.emit("connection", ws, request),
 			);
 		} else {
+			console.warn("[Unknown path]", pathname);
 			socket.destroy();
 		}
 	});

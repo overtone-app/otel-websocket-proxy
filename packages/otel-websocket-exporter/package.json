@@ -1,6 +1,6 @@
 {
 	"name": "otel-websocket-exporter",
-	"version": "0.0.32",
+	"version": "0.0.35",
 	"type": "module",
 	"exports": {
 		".": {

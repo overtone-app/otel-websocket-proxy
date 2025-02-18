@@ -1,14 +1,17 @@
 {
-  "name": "monorepo",
-  "private": true,
-  "scripts": {
-    "release": "pnpm run build:ts && pnpm -r --filter \"otel-websocket-*\" publish --no-git-checks",
-    "build:ts": "tsc --build tsconfig.all.json",
-    "dev:ts": "pnpm build:ts --watch",
-    "test": "CI=true pnpm workspaces foreach --parallel --all run test"
-  },
-  "devDependencies": {
-    "typescript": "^5.7.2",
-    "@biomejs/biome": "^1.9.4"
-  }
+	"name": "monorepo",
+	"private": true,
+	"scripts": {
+		"release": "pnpm run build:ts && pnpm -r --filter \"otel-websocket-*\" publish --no-git-checks",
+		"build:ts": "tsc --build tsconfig.all.json",
+		"dev:ts": "pnpm build:ts --watch",
+		"bump-version:patch": "pnpm run build:ts && pnpm --filter \"otel-websocket-*\" exec npm version patch",
+		"bump-version:minor": "pnpm run build:ts && pnpm --filter \"otel-websocket-*\" exec npm version minor",
+		"bump-version:major": "pnpm run build:ts && pnpm --filter \"otel-websocket-*\" exec npm version major",
+		"test": "CI=true pnpm workspaces foreach --parallel --all run test"
+	},
+	"devDependencies": {
+		"typescript": "^5.7.2",
+		"@biomejs/biome": "^1.9.4"
+	}
 }
