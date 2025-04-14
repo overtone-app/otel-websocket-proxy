@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@opentelemetry/api": "^1.9.0",
-    "@opentelemetry/core": "1.30.0",
-    "@opentelemetry/exporter-metrics-otlp-http": "0.57.0",
-    "@opentelemetry/exporter-trace-otlp-http": "0.57.0",
-    "@opentelemetry/resources": "^1.30.0",
-    "@opentelemetry/sdk-metrics": "1.30.0",
-    "@opentelemetry/sdk-trace-base": "1.30.0",
-    "@opentelemetry/sdk-trace-web": "1.30.0",
-    "@opentelemetry/semantic-conventions": "1.28.0",
+    "@opentelemetry/core": "2.0.0",
+    "@opentelemetry/exporter-metrics-otlp-http": "0.200.0",
+    "@opentelemetry/exporter-trace-otlp-http": "0.200.0",
+    "@opentelemetry/resources": "^2.0.0",
+    "@opentelemetry/sdk-metrics": "2.0.0",
+    "@opentelemetry/sdk-trace-base": "2.0.0",
+    "@opentelemetry/sdk-trace-web": "2.0.0",
+    "@opentelemetry/semantic-conventions": "1.32.0",
     "otel-websocket-exporter": "workspace:*",
     "otel-websocket-proxy": "workspace:*",
     "react": "^19.0.0",
@@ -27,7 +27,7 @@
     "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
-    "typescript": "^5.7.2",
-    "vite": "^6.0.7"
+    "typescript": "^5.8.3",
+    "vite": "^6.2.6"
   }
 }

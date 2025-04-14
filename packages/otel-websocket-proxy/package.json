@@ -1,6 +1,6 @@
 {
 	"name": "otel-websocket-proxy",
-	"version": "0.0.35",
+	"version": "0.0.36",
 	"type": "module",
 	"types": "./dist/src/index.d.ts",
 	"exports": {
@@ -17,7 +17,7 @@
 	},
 	"devDependencies": {
 		"@types/ws": "^8.5.13",
-		"typescript": "^5.7.2"
+		"typescript": "^5.8.3"
 	},
 	"scripts": {
 		"start": "node dist/src/bin.js",
